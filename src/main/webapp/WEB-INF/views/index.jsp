@@ -7,8 +7,14 @@
     <title>Spring3MVC with Hibernate3 CRUD Example using Annotations</title>
   </head>
   <body>
-    <h2>Spring3MVC with Hibernate3 CRUD Example using Annotations</h2>
-    <h2>1. <a href="employees.html">List of Countries</a></h2>
-    <h2>2. <a href="add.html">Add Country</a></h2>
-  </body>
+    <h2>Disaster Recovery Login</h2>
+    <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit">Login</button>
+    <label>
 </html>
