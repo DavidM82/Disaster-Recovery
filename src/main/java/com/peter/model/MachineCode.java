@@ -1,5 +1,7 @@
 package com.peter.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "disaster_machinecode")
-public class MachineCode {
+public class MachineCode implements Serializable {
+	
+	private static final long serialVersionUID = 12L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
