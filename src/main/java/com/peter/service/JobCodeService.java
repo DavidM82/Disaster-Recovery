@@ -19,6 +19,7 @@ public class JobCodeService implements GenericService{
 	GenericDao dao;
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public <E> void add(E object) {
 		// TODO Auto-generated method stub
 		dao.save(object);

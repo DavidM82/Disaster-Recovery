@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.peter</groupId>
-	<artifactId>PeterSpringMVCEx3</artifactId>
+	<artifactId>Disaster-Recovery</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>PeterSpringMVCEx3</name>
+	<name>Disaster-Recovery</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -150,7 +150,7 @@
 	</repositories>
 
 	<build>
-		<finalName>PeterSpringMVCEx3</finalName>
+		<finalName>Disaster-Recovery</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
