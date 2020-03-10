@@ -40,6 +40,7 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 				<value>com.peter.model.JobCode</value>
 				<value>com.peter.model.MachineCode</value>
 				<value>com.peter.model.TimeCard</value>
+				<value>com.peter.model.User</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
