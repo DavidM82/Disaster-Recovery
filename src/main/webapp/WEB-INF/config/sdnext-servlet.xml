@@ -37,7 +37,6 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>com.peter.model.Employee</value>
 				<value>com.peter.model.JobCode</value>
 				<value>com.peter.model.MachineCode</value>
 				<value>com.peter.model.TimeCard</value>
