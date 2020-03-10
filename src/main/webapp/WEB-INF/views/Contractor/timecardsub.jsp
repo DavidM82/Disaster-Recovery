@@ -168,7 +168,7 @@
                                         </td>
                                      </tr>   
             
-                                     <td align ="right"><a href="addmore.html">Add More</a></td<br>   
+                                     <td align ="right"><a href="addmore.html">Add More</a></td> <br>   
 
                 </table>  <br>
                                    <p><input type="submit" value="Submit"></p>

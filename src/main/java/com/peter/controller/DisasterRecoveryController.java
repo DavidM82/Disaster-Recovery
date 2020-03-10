@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.peter.bean.TimeCardBean;
-import com.peter.model.Employee;
+
 import com.peter.model.TimeCard;
 import com.peter.service.GenericService;
 
@@ -39,6 +39,13 @@ public class DisasterRecoveryController {
 		TimeCard timeCard = prepareTimeCard(timeCardBean);
 		timeService.add(timeCard);
 		return new ModelAndView("redirect:/add.html");
+	}
+	
+	
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public ModelAndView welcome() {
+		return new ModelAndView("index");
 	}
 	
 	@RequestMapping(value="/timecards", method = RequestMethod.GET)
