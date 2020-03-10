@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.peter.bean.JobCodeBean;
+import com.peter.bean.MachineCodeBean;
 import com.peter.bean.TimeCardBean;
-import com.peter.model.Employee;
+
+import com.peter.model.JobCode;
+import com.peter.model.MachineCode;
 import com.peter.model.TimeCard;
 import com.peter.service.GenericService;
 
@@ -38,14 +43,14 @@ public class DisasterRecoveryController {
 	public ModelAndView saveTimeCard(@ModelAttribute("command") TimeCardBean timeCardBean, BindingResult result) {
 		TimeCard timeCard = prepareTimeCard(timeCardBean);
 		timeService.add(timeCard);
-		return new ModelAndView("redirect:/add.html");
+		return new ModelAndView("redirect:/timecardstatus");
 	}
 	
 	@RequestMapping(value="/timecards", method = RequestMethod.GET)
 	public ModelAndView listTimeCards() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("timecards", prepareTimeCardBeans(timeService.getAll()));
-		return new ModelAndView("timecardList", model);
+		return new ModelAndView("Contractor/timecardstatus", model);
 	}
 	
 	@RequestMapping(value="/removeTimeCard", method = RequestMethod.GET)
@@ -55,7 +60,149 @@ public class DisasterRecoveryController {
 		model.put("timecard", null);
 		model.put("timecards", prepareTimeCardBeans(timeService.getAll()));
 		
-		return new ModelAndView("index", model);
+		return new ModelAndView("/Admin/timecardapp", model);
+	}
+	
+	@RequestMapping(value="/timecard", method = RequestMethod.GET)
+	public ModelAndView editTimeCard(@ModelAttribute("command") TimeCardBean timeCardBean, BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("timecard", prepareTimeCardBean(timeService.get(timeCardBean.getTimeCodeId())));
+		model.put("timecards", prepareTimeCardBeans(timeService.getAll()));
+		return new ModelAndView("/Admin/timecardapp", model);
+	}
+	
+	@RequestMapping(value="/machinecode", method = RequestMethod.POST)
+	public ModelAndView saveMachineCode(@ModelAttribute("command") MachineCodeBean machineCodeBean, BindingResult result) {
+		MachineCode machineCode = prepareMachineCode(machineCodeBean);
+		machineService.add(machineCode);
+		return new ModelAndView("redirect:/machinecodemgt");
+	}
+	
+	@RequestMapping(value="/machinecodes", method = RequestMethod.GET)
+	public ModelAndView listMachineCodes() {
+		Map<String,Object> model = new HashMap<String,Object>();
+		model.put("machinecodes", prepareMachineCodeBeans(machineService.getAll()));
+		return new ModelAndView("redirect:/machinecodemgt", model);
+	}
+	
+	@RequestMapping(value="/removeMachineCode", method = RequestMethod.GET)
+	public ModelAndView removeMachineCode(@ModelAttribute("command") MachineCodeBean machineCodeBean, BindingResult result) {
+		machineService.delete(machineCodeBean.getMachineCodeId());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("machineCode", null);
+		model.put("machineCodes", prepareMachineCodeBeans(machineService.getAll()));
+		return new ModelAndView("redirect:/machinecodemgt", model);
+	}
+	
+	@RequestMapping(value="/editMachineCode", method = RequestMethod.GET)
+	public ModelAndView editMachineCode(@ModelAttribute("command") MachineCodeBean machineCodeBean, BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("machineCode", prepareMachineCode(machineCodeBean));
+		model.put("machineCodes", prepareMachineCodeBeans(machineService.getAll()));
+		return new ModelAndView("/Admin/machinecodemgt", model);
+	}
+	
+	@RequestMapping(value="/jobcode", method = RequestMethod.POST)
+	public ModelAndView saveJobCode(@ModelAttribute("command") JobCodeBean jobCodeBean, BindingResult result) {
+		JobCode jobCode = prepareJobCode(jobCodeBean);
+		return new ModelAndView("redirect:/jobcodemgt");
+	}
+	
+	@RequestMapping(value="jobcodes", method = RequestMethod.GET)
+	public ModelAndView listJobCodes() {
+		Map<String, Object> model = new HashMap<String,Object>();
+		model.put("jobcodes", prepareJobCodeBeans(jobService.getAll()));
+		return new ModelAndView("redirect:/jobcodemgt", model);
+	}
+	
+	@RequestMapping(value="/removeJobCode", method = RequestMethod.GET)
+	public ModelAndView removeJobCode(@ModelAttribute("commmand") JobCodeBean jobCodeBean, BindingResult result) {
+		jobService.delete(jobCodeBean.getId());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("jobCode", null);
+		model.put("jobCodes", prepareJobCodeBeans(jobService.getAll()));
+		return new ModelAndView("redirect:/jobcodemgt");
+	}
+	
+	@RequestMapping(value ="/editJobCode", method = RequestMethod.GET)
+	public ModelAndView editJobCode(@ModelAttribute("command") JobCodeBean jobCodeBean, BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("jobCode", prepareJobCode(jobCodeBean));
+		model.put("jobCodes", prepareJobCodeBeans(jobService.getAll()));
+		return new ModelAndView("/Admin/jobcodemgt", model);
+	}
+	
+	private JobCode prepareJobCode(JobCodeBean jobCodeBean) {
+		JobCode jobCode = new JobCode();
+		jobCode.setDescription(jobCodeBean.getDescription());
+		jobCode.setHourlyRate(jobCodeBean.getHourlyRate());
+		jobCode.setJobCodeId(jobCodeBean.getId());
+		jobCode.setMaxHours(jobCodeBean.getMaxHours());
+		return jobCode;
+	}
+	
+	private JobCodeBean prepareJobCodeBean(JobCode jobCode) {
+		JobCodeBean jobCodeBean = new JobCodeBean();
+		jobCodeBean.setDescription(jobCode.getDescription());
+		jobCodeBean.setHourlyRate(jobCode.getHourlyRate());
+		jobCodeBean.setId(jobCode.getJobCodeId());
+		jobCodeBean.setMaxHours(jobCode.getMaxHours());
+		return jobCodeBean;
+	}
+	
+	private List<JobCodeBean> prepareJobCodeBeans(List<Object> objects){
+		List<JobCodeBean> jobCodeBeans = null;
+		if (!objects.isEmpty() && objects != null) {
+			jobCodeBeans = new ArrayList<JobCodeBean>();
+			for (Object j: objects) {
+				if (j instanceof JobCode) {
+					JobCodeBean jb = prepareJobCodeBean((JobCode) j);
+					jobCodeBeans.add(jb);					
+				} else {
+					System.out.println("object in prepareJobCodeBeans was not JobCode object");
+					System.out.println(j.toString());
+					return null;
+				}
+
+			}
+		} 
+		return jobCodeBeans;
+	}
+
+	private List<MachineCodeBean> prepareMachineCodeBeans(List<Object> objects){
+		List<MachineCodeBean> machineCodeBeans = null;
+		if (!objects.isEmpty() && objects !=null) {
+			machineCodeBeans = new ArrayList<MachineCodeBean>();
+			for (Object m: objects) {
+				if (m instanceof MachineCode) {
+					MachineCodeBean mb = prepareMachineCodeBean((MachineCode) m);
+					machineCodeBeans.add(mb);
+				} else {
+					System.out.println("object in prepareMachineCodeBeans was not MachineCode object.");
+					System.out.println(m.toString());
+					return null;
+				}
+			}
+		}
+		return machineCodeBeans;
+	}
+	
+	private MachineCodeBean prepareMachineCodeBean(MachineCode machineCode) {
+		MachineCodeBean machineCodeBean = new MachineCodeBean();
+		machineCodeBean.setDescription(machineCode.getDescription());
+		machineCodeBean.setHourlyRate(machineCode.getHourlyRate());
+		machineCodeBean.setMachineCodeId(machineCode.getMachineCodeId());
+		machineCodeBean.setMaxHours(machineCode.getMaxHours());
+		return machineCodeBean;
+	}
+	
+	private MachineCode prepareMachineCode(MachineCodeBean machineCodeBean) {
+		MachineCode machineCode = new MachineCode();
+		machineCode.setDescription(machineCodeBean.getDescription());
+		machineCode.setHourlyRate(machineCodeBean.getHourlyRate());
+		machineCode.setMachineCodeId(machineCodeBean.getMachineCodeId());
+		machineCode.setMaxHours(machineCodeBean.getMaxHours());
+		return machineCode;
 	}
 	
 	private TimeCard prepareTimeCard(TimeCardBean timeCardBean){
@@ -69,15 +216,22 @@ public class DisasterRecoveryController {
 		return timecard;
 	}
 	
-	private TimeCardBean prepareTimeCardBean(TimeCard timeCard) {
+	private TimeCardBean prepareTimeCardBean(Object timecard) {
 		TimeCardBean bean = new TimeCardBean();
-		bean.setApproval(timeCard.getApproval());
-		bean.setContractorName(timeCard.getContractorName());
-		bean.setSiteCode(timeCard.getSiteCode());
-		bean.setTimeCodeId(timeCard.getTimeCardId());
-		bean.setTotalAmount(timeCard.getTotalAmount());
-		bean.setTotalHours(timeCard.getTotalHours());
-		return bean;
+		if (timecard instanceof TimeCard) {
+			TimeCard timeCard = (TimeCard) timecard;
+			bean.setApproval(timeCard.getApproval());
+			bean.setContractorName(timeCard.getContractorName());
+			bean.setSiteCode(timeCard.getSiteCode());
+			bean.setTimeCodeId(timeCard.getTimeCardId());
+			bean.setTotalAmount(timeCard.getTotalAmount());
+			bean.setTotalHours(timeCard.getTotalHours());
+			return bean;			
+		} else {
+			System.out.println("prepareTimeCardBean recieved object that's not a TimeCard.");
+			System.out.println(timecard.toString());
+			return null;
+		}
 	}
 	
 	private List<TimeCardBean> prepareTimeCardBeans(List<Object> timecards){
