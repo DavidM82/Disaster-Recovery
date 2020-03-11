@@ -23,10 +23,10 @@ public class MachineCode implements Serializable {
 	@Column(name = "description")
 	private String description;
 	
-	@Column(name = "rate per hour")
+	@Column(name = "hourlyRate")
 	private double hourlyRate;
 	
-	@Column(name = "max daily hours")
+	@Column(name = "maxHours")
 	private int maxHours;
 
 	public int getMachineCodeId() {

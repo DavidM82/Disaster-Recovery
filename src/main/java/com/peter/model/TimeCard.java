@@ -19,19 +19,19 @@ public class TimeCard implements Serializable {
 	@Column(name = "id")
 	private int timeCardId;
 	
-	@Column(name = "site code")
+	@Column(name = "siteCode")
 	private String siteCode;
 	
-	@Column(name = "Contractor Name")
+	@Column(name = "contractorName")
 	private String contractorName;
 	
-	@Column(name = "Total hours")
+	@Column(name = "totalHours")
 	private int totalHours;
 	
-	@Column(name = "Total Amount")
+	@Column(name = "totalAmount")
 	private double totalAmount;
 	
-	@Column(name = "Approval")
+	@Column(name = "approval")
 	private String approval;
 
 	public int getTimeCardId() {

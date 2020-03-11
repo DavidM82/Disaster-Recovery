@@ -20,13 +20,16 @@ public class JobCode implements Serializable {
 	@Column(name = "id")
 	private int jobCodeId;
 	
+	@Column(name = "jobCode")
+	private String jobCode;
+	
 	@Column(name = "description")
 	private String description;
 	
-	@Column(name = "rate per hour")
+	@Column(name = "hourlyRate")
 	private double hourlyRate;
 	
-	@Column(name = "max daily hours")
+	@Column(name = "maxHours")
 	private int maxHours;
 
 	public int getJobCodeId() {
@@ -37,6 +40,14 @@ public class JobCode implements Serializable {
 		this.jobCodeId = jobCodeId;
 	}
 
+	public String getJobCode() {
+		return jobCode;
+	}
+	
+	public void setJobCode(String jobCode) {
+		this.jobCode = jobCode;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
