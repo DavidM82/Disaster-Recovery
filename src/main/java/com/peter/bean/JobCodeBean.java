@@ -2,15 +2,23 @@ package com.peter.bean;
 
 public class JobCodeBean {
 
-	private Integer id;
+	private Integer jobCodeId;
+	private String jobCode;
 	private String description;
 	private Double hourlyRate;
 	private Integer maxHours;
-	public Integer getId() {
-		return id;
+
+	public Integer getJobCodeId() {
+		return jobCodeId;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setJobCodeId(Integer id) {
+		this.jobCodeId = id;
+	}
+	public String getJobCode() {
+		return jobCode;
+	}
+	public void setJobCode(String jobCode) {
+		this.jobCode = jobCode;
 	}
 	public String getDescription() {
 		return description;

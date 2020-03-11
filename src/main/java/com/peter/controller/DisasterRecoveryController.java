@@ -41,7 +41,10 @@ public class DisasterRecoveryController {
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView welcome() {
-		return new ModelAndView("index");
+		System.out.println("Welcome");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/jobcodemgt");
+		return mav;
 	}
 	
 	@RequestMapping(value = "/saveTimeCard", method = RequestMethod.POST)
@@ -65,7 +68,7 @@ public class DisasterRecoveryController {
 		model.put("timecard", null);
 		model.put("timecards", prepareTimeCardBeans(timeService.getAll()));
 		
-		return new ModelAndView("/Admin/timecardapp", model);
+		return new ModelAndView("timecardapp", model);
 	}
 	
 	@RequestMapping(value="/timecard", method = RequestMethod.GET)
@@ -107,22 +110,38 @@ public class DisasterRecoveryController {
 		return new ModelAndView("/Admin/machinecodemgt", model);
 	}
 	
-	@RequestMapping(value="/jobcode", method = RequestMethod.POST)
-	public ModelAndView saveJobCode(@ModelAttribute("command") JobCodeBean jobCodeBean, BindingResult result) {
-		JobCode jobCode = prepareJobCode(jobCodeBean);
-		return new ModelAndView("redirect:/jobcodemgt");
+	@RequestMapping(value="/addnewJobCode", method = RequestMethod.GET)
+	public ModelAndView switchToJobCodeForm(@ModelAttribute("command") JobCodeBean jobCodeBean, BindingResult result) {
+		JobCode jobCode = new JobCode();
+		ModelAndView mav = new ModelAndView();
+		System.out.println("new JobCode");
+		mav.setViewName("/jobcodeform");
+		mav.addObject("jobCode", jobCode);
+		return mav;
 	}
 	
-	@RequestMapping(value="jobcodes", method = RequestMethod.GET)
+	@RequestMapping(value="/jobCode", method = RequestMethod.POST)
+	public ModelAndView saveJobCode(@ModelAttribute("command") JobCodeBean jobCodeBean, BindingResult result) {
+		System.out.println("/jobCode called");
+		JobCode jobCode = prepareJobCode(jobCodeBean);
+		jobService.add(jobCode);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/jobCodes");
+		return mav;
+	}
+	
+	@RequestMapping(value="/jobCodes", method = RequestMethod.GET)
 	public ModelAndView listJobCodes() {
-		Map<String, Object> model = new HashMap<String,Object>();
-		model.put("jobcodes", prepareJobCodeBeans(jobService.getAll()));
-		return new ModelAndView("redirect:/jobcodemgt", model);
+		System.out.println("/jobCodes called");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("jobcodes", prepareJobCodeBeans(jobService.getAll()));
+		mav.setViewName("jobcodemgt");
+		return mav;
 	}
 	
 	@RequestMapping(value="/removeJobCode", method = RequestMethod.GET)
 	public ModelAndView removeJobCode(@ModelAttribute("commmand") JobCodeBean jobCodeBean, BindingResult result) {
-		jobService.delete(jobCodeBean.getId());
+		jobService.delete(jobCodeBean.getJobCodeId());
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("jobCode", null);
 		model.put("jobCodes", prepareJobCodeBeans(jobService.getAll()));
@@ -141,8 +160,9 @@ public class DisasterRecoveryController {
 		JobCode jobCode = new JobCode();
 		jobCode.setDescription(jobCodeBean.getDescription());
 		jobCode.setHourlyRate(jobCodeBean.getHourlyRate());
-		jobCode.setJobCodeId(jobCodeBean.getId());
+		jobCode.setJobCodeId(jobCodeBean.getJobCodeId());
 		jobCode.setMaxHours(jobCodeBean.getMaxHours());
+		jobCode.setJobCode(jobCodeBean.getJobCode());
 		return jobCode;
 	}
 	
@@ -150,7 +170,8 @@ public class DisasterRecoveryController {
 		JobCodeBean jobCodeBean = new JobCodeBean();
 		jobCodeBean.setDescription(jobCode.getDescription());
 		jobCodeBean.setHourlyRate(jobCode.getHourlyRate());
-		jobCodeBean.setId(jobCode.getJobCodeId());
+		jobCodeBean.setJobCodeId(jobCode.getJobCodeId());
+		jobCodeBean.setJobCode(jobCode.getJobCode());
 		jobCodeBean.setMaxHours(jobCode.getMaxHours());
 		return jobCodeBean;
 	}

@@ -17,7 +17,7 @@ public class JobCode implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id")
+	@Column(name = "jobCodeId")
 	private int jobCodeId;
 	
 	@Column(name = "jobCode")
