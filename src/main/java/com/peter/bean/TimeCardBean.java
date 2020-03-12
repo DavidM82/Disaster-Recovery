@@ -2,18 +2,18 @@ package com.peter.bean;
 
 public class TimeCardBean {
 
-	private Integer timeCodeId;
+	private Integer timeCardId;
 	private String siteCode;
 	private String contractorName;
 	private Integer totalHours;
 	private Double totalAmount;
 	private String approval;
 	
-	public Integer getTimeCodeId() {
-		return timeCodeId;
+	public Integer getTimeCardId() {
+		return timeCardId;
 	}
-	public void setTimeCodeId(Integer timeCodeId) {
-		this.timeCodeId = timeCodeId;
+	public void setTimeCardId(Integer timeCodeId) {
+		this.timeCardId = timeCodeId;
 	}
 	public String getSiteCode() {
 		return siteCode;

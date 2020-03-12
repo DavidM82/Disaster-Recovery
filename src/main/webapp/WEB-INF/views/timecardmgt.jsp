@@ -16,14 +16,10 @@
     </div>
     
     <body>
-
-  
-        
-        
             <div class = "row1">
-               <section><a href="jobcodemgt.html">Job Code Management</a></section><br>
-               <section><a href="machinemgt.html">Machine Managment</a></section><br>
-               <section><a href="timecardapp.html">Timecard Approval</a></section><br>
+               <section><a href="jobCodes.html">Job Code Management</a></section><br>
+               <section><a href="machineCodes.html">Machine Code Management</a></section><br>
+               <section><a href="timecardsAdmin.html">Time Card Approval</a></section><br>
                
             </div>
         
@@ -36,18 +32,21 @@
                     <th>Contractor Name</th>
                     <th>Total Hours </th>
                     <th>Total Amount</th>
-                    <th>Time Card Manager Approval</th>
+                    <th>Status</th>
+                    <th>Action</th>
                     
                 </tr>
 
-                <tr>
-                    <th>S C</th>
-                    <th>C N </th>
-                    <th>T H </th>
-                    <th>T A </th>
-                    <th>T C A </th>
-                    
-                </tr>
+                <c:forEach items="${timeCards}" var="timeCard">
+				<tr>
+					<td><c:out value="${timeCard.siteCode}"/></td>
+					<td><c:out value="${timeCard.contractorName}"/></td>
+					<td><c:out value="${timeCard.totalHours} Hrs."/></td>
+					<td><c:out value="$ ${timeCard.totalAmount}"/></td>
+					<td><c:out value="${timeCard.approval}"/></td>
+					<td><a href="timecardAdmin.html?timeCardId=${timeCard.timeCardId}">Change Approval</a></td>
+				</tr>
+				</c:forEach>
         
               
         </div>

@@ -19,7 +19,7 @@
             <div class = "row1">
                <section><a href="jobCodes.html">Job Code Management</a></section><br>
                <section><a href="machineCodes.html">Machine Code Management</a></section><br>
-               <section><a href="timecardapp.html">Timecard Approval</a></section><br>
+               <section><a href="timecardsAdmin.html">Time Card Approval</a></section><br>
                
             </div>
         
@@ -39,8 +39,8 @@
 				<tr>
 					<td><c:out value="${jobCode.jobCode}"/></td>
 					<td><c:out value="${jobCode.description}"/></td>
-					<td><c:out value="${jobCode.hourlyRate}"/></td>
-					<td><c:out value="${jobCode.maxHours}"/></td>
+					<td><c:out value="$ ${jobCode.hourlyRate}/Hr."/></td>
+					<td><c:out value="${jobCode.maxHours} Hr"/></td>
 					<td><a href="editJobCode.html?jobCodeId=${jobCode.jobCodeId}">Edit</a> |
 					<a href="removeJobCode.html?jobCodeId=${jobCode.jobCodeId}">Delete</a></td>
 					

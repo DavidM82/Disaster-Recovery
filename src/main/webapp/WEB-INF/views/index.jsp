@@ -17,4 +17,8 @@
 
     <button type="submit">Login</button>
     <label>
+    
+    <br/>
+    <a href="jobCodes.html">Admin</a> <br />
+    <a href="timecardsCon.html">Contracter</a>
 </html>

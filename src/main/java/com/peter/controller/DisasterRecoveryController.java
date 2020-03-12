@@ -42,40 +42,55 @@ public class DisasterRecoveryController {
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView welcome() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/machineCodes.html");
+		mav.setViewName("index");
 		return mav;
 	}
 	
-	@RequestMapping(value = "/saveTimeCard", method = RequestMethod.POST)
-	public ModelAndView saveTimeCard(@ModelAttribute("command") TimeCardBean timeCardBean, BindingResult result) {
-		TimeCard timeCard = prepareTimeCard(timeCardBean);
+	@RequestMapping(value = "/savetimecardAdmin", method = RequestMethod.POST)
+	public ModelAndView saveTimeCardAdmin(@ModelAttribute("command") TimeCard timeCard, BindingResult result) {
 		timeService.add(timeCard);
-		return new ModelAndView("redirect:/timecardstatus");
+		return new ModelAndView("redirect:/timecardsAdmin.html");
 	}
 	
-	@RequestMapping(value="/timecards", method = RequestMethod.GET)
-	public ModelAndView listTimeCards() {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("timecards", prepareTimeCardBeans(timeService.getAll()));
-		return new ModelAndView("Contractor/timecardstatus", model);
+	@RequestMapping(value="/timecardsAdmin", method = RequestMethod.GET)
+	public ModelAndView showTimeCardsAdmin() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("timeCards", timeService.getAll());
+		mav.setViewName("timecardmgt");
+		return mav;
 	}
-	
-	@RequestMapping(value="/removeTimeCard", method = RequestMethod.GET)
-	public ModelAndView deleteTimeCard(@ModelAttribute("command") TimeCardBean timeCardBean, BindingResult result) {
-		timeService.delete(timeCardBean.getTimeCodeId());
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("timecard", null);
-		model.put("timecards", prepareTimeCardBeans(timeService.getAll()));
 		
-		return new ModelAndView("timecardapp", model);
+	@RequestMapping(value="/timecardAdmin", method = RequestMethod.GET)
+	public ModelAndView editTimeCard(@ModelAttribute("command") TimeCard timeCard, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("timeCard", timeService.get(timeCard.getTimeCardId()));
+		mav.setViewName("timecardapproval");
+		return mav;
 	}
 	
-	@RequestMapping(value="/timecard", method = RequestMethod.GET)
-	public ModelAndView editTimeCard(@ModelAttribute("command") TimeCardBean timeCardBean, BindingResult result) {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("timecard", prepareTimeCardBean(timeService.get(timeCardBean.getTimeCodeId())));
-		model.put("timecards", prepareTimeCardBeans(timeService.getAll()));
-		return new ModelAndView("/Admin/timecardapp", model);
+	@RequestMapping(value="/timecardsCon", method = RequestMethod.GET)
+	public ModelAndView showTimeCardsContractor() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("timeCards", timeService.getAll());
+		mav.setViewName("timecardscon");
+		return mav;
+	}
+	
+	@RequestMapping(value="/timecardCon", method = RequestMethod.GET)
+	public ModelAndView showTimeCardContractor(@ModelAttribute("command") TimeCardBean timeCardBean, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		TimeCard timeCard = new TimeCard();
+		mav.setViewName("timecardform");
+		mav.addObject("timeCard", timeCard);
+		mav.addObject("jobCodes", jobService.getAll());
+		mav.addObject("machineCodes", machineService.getAll());
+		return mav;
+	}
+	
+	@RequestMapping(value="/savetimecardCon", method = RequestMethod.POST)
+	public ModelAndView saveTimeCardContractor(@ModelAttribute("command") TimeCard timeCard, BindingResult result) {
+		timeService.add(timeCard);
+		return new ModelAndView("redirect:/timecardsCon.html");
 	}
 	
 	@RequestMapping(value = "/addnewMachineCode", method = RequestMethod.GET)
@@ -169,33 +184,6 @@ public class DisasterRecoveryController {
 		return jobCode;
 	}
 	
-	private List<MachineCodeBean> prepareMachineCodeBeans(List<Object> objects){
-		List<MachineCodeBean> machineCodeBeans = null;
-		if (!objects.isEmpty() && objects !=null) {
-			machineCodeBeans = new ArrayList<MachineCodeBean>();
-			for (Object m: objects) {
-				if (m instanceof MachineCode) {
-					MachineCodeBean mb = prepareMachineCodeBean((MachineCode) m);
-					machineCodeBeans.add(mb);
-				} else {
-					System.out.println("object in prepareMachineCodeBeans was not MachineCode object.");
-					System.out.println(m.toString());
-					return null;
-				}
-			}
-		}
-		return machineCodeBeans;
-	}
-	
-	private MachineCodeBean prepareMachineCodeBean(MachineCode machineCode) {
-		MachineCodeBean machineCodeBean = new MachineCodeBean();
-		machineCodeBean.setDescription(machineCode.getDescription());
-		machineCodeBean.setHourlyRate(machineCode.getHourlyRate());
-		machineCodeBean.setMachineCodeId(machineCode.getMachineCodeId());
-		machineCodeBean.setMaxHours(machineCode.getMaxHours());
-		return machineCodeBean;
-	}
-	
 	private MachineCode prepareMachineCode(MachineCodeBean machineCodeBean) {
 		MachineCode machineCode = new MachineCode();
 		machineCode.setMachineCode(machineCodeBean.getMachineCode());
@@ -211,45 +199,10 @@ public class DisasterRecoveryController {
 		timecard.setApproval(timeCardBean.getApproval());
 		timecard.setContractorName(timeCardBean.getContractorName());
 		timecard.setSiteCode(timeCardBean.getSiteCode());
-		timecard.setTimeCardId(timeCardBean.getTimeCodeId());
+		timecard.setTimeCardId(timeCardBean.getTimeCardId());
 		timecard.setTotalAmount(timeCardBean.getTotalAmount());
 		timecard.setTotalHours(timeCardBean.getTotalHours());
 		return timecard;
 	}
 	
-	private TimeCardBean prepareTimeCardBean(Object timecard) {
-		TimeCardBean bean = new TimeCardBean();
-		if (timecard instanceof TimeCard) {
-			TimeCard timeCard = (TimeCard) timecard;
-			bean.setApproval(timeCard.getApproval());
-			bean.setContractorName(timeCard.getContractorName());
-			bean.setSiteCode(timeCard.getSiteCode());
-			bean.setTimeCodeId(timeCard.getTimeCardId());
-			bean.setTotalAmount(timeCard.getTotalAmount());
-			bean.setTotalHours(timeCard.getTotalHours());
-			return bean;			
-		} else {
-			System.out.println("prepareTimeCardBean recieved object that's not a TimeCard.");
-			System.out.println(timecard.toString());
-			return null;
-		}
-	}
-	
-	private List<TimeCardBean> prepareTimeCardBeans(List<Object> timecards){
-		List<TimeCardBean> timecardBeans = null;
-		
-		if (!timecards.isEmpty() && timecards != null) {
-			timecardBeans = new ArrayList<TimeCardBean>();
-			for (Object t: timecards) {
-				if (t instanceof TimeCard) {
-					TimeCardBean tb = prepareTimeCardBean( (TimeCard) t);
-					timecardBeans.add(tb);					
-				} else {
-					System.out.println("Object in prepareTimeCardBeans is not a TimeCard: " + t.toString());
-				}
-
-			}
-		}
-		return timecardBeans; 
-	}
 }

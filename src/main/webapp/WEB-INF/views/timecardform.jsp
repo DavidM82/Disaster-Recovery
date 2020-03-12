@@ -19,24 +19,44 @@
         </div>
 	<body>
 		
-            
-            
-                <div class ="row1">
-                  <p><a href="timecardstatus.html">Timecard Approval</a></p><br>
-                   
-                </div>
-            
-               <div class ="row2">
-                <h3>Timesheet Submission</h3>
-                <p> 
-                Site Code:  <input type="text">
-                Contractor Name:   <input type="text">
-                Date:            <input type="date">
-
+               <div class ="row1">
+                <h3>Time Card Submission</h3>
                 
-
-                </p>
-                <form action="/timecard.html">
+               <form:form method="POST" action="savetimecardCon.html">
+	   			<table>
+			    <tr>
+			        <td><form:label path="timeCardId">Time Card Id: (Can't be changed)</form:label></td>
+			        <td><form:input path="timeCardId" value="${timeCard.timeCardId}" readonly="true"/></td>
+			    </tr>
+			    <tr>
+			    	<td><form:label path="siteCode">Site Code:</form:label></td>
+			    	<td><form:input path="siteCode" value="${timeCard.siteCode }"/></td>
+			    </tr>
+			    <tr>
+			        <td><form:label path="contractorName">Contractor Name:</form:label></td>
+			        <td><form:input path="contractorName" value="${timeCard.contractorName}"/></td>
+			    </tr>
+			    <tr>
+			        <td><form:label path="totalHours">Total Hours:</form:label></td>
+			        <td><form:input path="totalHours" value="${timeCard.totalHours}"/></td>
+			    </tr>
+			    
+			    <tr>
+			        <td><form:label path="totalAmount">Total Amount:</form:label></td>
+                    <td><form:input path="totalAmount" value="${timeCard.totalAmount}"/></td>
+			    </tr>
+			    <form:hidden path="approval" value="pending"/>
+			    <tr>
+			      <td colspan="2"><input type="submit" value="Submit"/></td>
+		      </tr>
+			</table> 
+		</form:form>
+               
+               
+               
+               
+               
+               <!--  <form action="/timecard.html">
                 <table align="center" border="1">
                     <tr>
                         <th>Labor Entry</th>
@@ -173,7 +193,7 @@
                 </table>  <br>
                                    <p><input type="submit" value="Submit"></p>
                                    <p><input type="reset" value="Reset"></p>
-                           </form>
+                           </form> -->
             </div>
             </body>
     

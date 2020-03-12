@@ -16,7 +16,6 @@ public class TimeCard implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id")
 	private int timeCardId;
 	
 	@Column(name = "siteCode")

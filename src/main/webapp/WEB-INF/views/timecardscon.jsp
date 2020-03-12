@@ -18,20 +18,10 @@
          </header>
         </div>
         <body>
-    
-      
-            
-            
-                <div class ="row1">
-                   
-                   <p><a href="timecardsub.html">Timecard Submission</a></p><br>
-                   
-                </div>
-            
                <div class ="row2">
              
             <h2>Time Card Status</h2>
-             <a href="timecardsub.html">Add New Time Card</a><br> 
+             <a href="timecardCon.html">Add New Time Card</a><br> 
              <table align="center" border="1">
                  <tr>
                      <th>Site Code</th>
@@ -41,15 +31,15 @@
                      <th>Time Card Status</th>
                      
                  </tr>
-                <tr>
-                   <th>S C</th>
-                   <th> C N</th>
-                   <th>T H </th>
-                   <th> T A</th>
-                   <th> TS</th>
-                   
-
-                </tr>
+                <c:forEach items="${timeCards}" var="timeCard">
+				<tr>
+					<td><c:out value="${timeCard.siteCode}"/></td>
+					<td><c:out value="${timeCard.contractorName}"/></td>
+					<td><c:out value="${timeCard.totalHours} Hrs."/></td>
+					<td><c:out value="$ ${timeCard.totalAmount}"/></td>
+					<td><c:out value="${timeCard.approval}"/></td>
+				</tr>
+				</c:forEach>
                    
                         
                             

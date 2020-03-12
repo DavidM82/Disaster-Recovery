@@ -14,7 +14,7 @@
 		<form:form method="POST" action="jobCode.html">
 	   		<table>
 			    <tr>
-			        <td><form:label path="jobCodeId">Job Code Id:</form:label></td>
+			        <td><form:label path="jobCodeId">Job Code Id: (Can't be changed)</form:label></td>
 			        <td><form:input path="jobCodeId" value="${jobCode.jobCodeId}" readonly="true"/></td>
 			    </tr>
 			    <tr>
