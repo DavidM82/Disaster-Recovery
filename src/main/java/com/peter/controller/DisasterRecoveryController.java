@@ -43,7 +43,7 @@ public class DisasterRecoveryController {
 	public ModelAndView welcome() {
 		System.out.println("Welcome");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/jobcodemgt");
+		mav.setViewName("redirect:/jobCodes.html");
 		return mav;
 	}
 	
@@ -122,19 +122,17 @@ public class DisasterRecoveryController {
 	
 	@RequestMapping(value="/jobCode", method = RequestMethod.POST)
 	public ModelAndView saveJobCode(@ModelAttribute("command") JobCodeBean jobCodeBean, BindingResult result) {
-		System.out.println("/jobCode called");
 		JobCode jobCode = prepareJobCode(jobCodeBean);
 		jobService.add(jobCode);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/jobCodes");
+		mav.setViewName("redirect:/jobCodes.html");
 		return mav;
 	}
 	
 	@RequestMapping(value="/jobCodes", method = RequestMethod.GET)
 	public ModelAndView listJobCodes() {
-		System.out.println("/jobCodes called");
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("jobcodes", prepareJobCodeBeans(jobService.getAll()));
+		mav.addObject("jobCodes", jobService.getAll());
 		mav.setViewName("jobcodemgt");
 		return mav;
 	}
@@ -142,18 +140,16 @@ public class DisasterRecoveryController {
 	@RequestMapping(value="/removeJobCode", method = RequestMethod.GET)
 	public ModelAndView removeJobCode(@ModelAttribute("commmand") JobCodeBean jobCodeBean, BindingResult result) {
 		jobService.delete(jobCodeBean.getJobCodeId());
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("jobCode", null);
-		model.put("jobCodes", prepareJobCodeBeans(jobService.getAll()));
-		return new ModelAndView("redirect:/jobcodemgt");
+		
+		return new ModelAndView("redirect:/jobCodes.html");
 	}
 	
 	@RequestMapping(value ="/editJobCode", method = RequestMethod.GET)
 	public ModelAndView editJobCode(@ModelAttribute("command") JobCodeBean jobCodeBean, BindingResult result) {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("jobCode", prepareJobCode(jobCodeBean));
-		model.put("jobCodes", prepareJobCodeBeans(jobService.getAll()));
-		return new ModelAndView("/Admin/jobcodemgt", model);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("jobCode", jobService.get(jobCodeBean.getJobCodeId()) );
+		mav.setViewName("jobcodeform");
+		return mav;
 	}
 	
 	private JobCode prepareJobCode(JobCodeBean jobCodeBean) {

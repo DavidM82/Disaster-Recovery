@@ -31,7 +31,7 @@ public class JobCodeDaoImpl extends GenericAbstractDao{
 	@Override
 	public <E> void delete(int id) {
 		// TODO Auto-generated method stub
-		sessionFactory.getCurrentSession().createQuery("DELETE FROM disaster_jobcode WHERE id=" + id).executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("DELETE FROM JobCode jobcode WHERE jobcode.jobCodeId=" + id).executeUpdate();
 	}
 
 }

@@ -17,7 +17,7 @@
     
 <body>        
             <div class = "row1">
-               <section><a href="jobcodemgt.html">Job Code Management</a></section><br>
+               <section><a href="jobCodes.html">Job Code Management</a></section><br>
                <section><a href="machinemgt.html">Machine Management</a></section><br>
                <section><a href="timecardapp.html">Timecard Approval</a></section><br>
                
@@ -35,12 +35,14 @@
                     
                 </tr>
         
-        		<c:forEach items="${jobCode}" var="jobCodes">
+        		<c:forEach items="${jobCodes}" var="jobCode">
 				<tr>
 					<td><c:out value="${jobCode.jobCode}"/></td>
 					<td><c:out value="${jobCode.description}"/></td>
 					<td><c:out value="${jobCode.hourlyRate}"/></td>
 					<td><c:out value="${jobCode.maxHours}"/></td>
+					<td><a href="editJobCode.html?jobCodeId=${jobCode.jobCodeId}">Edit</a></td>
+                    <td><a href="removeJobCode.html?jobCodeId=${jobCode.jobCodeId}">Delete</a></td>
 				</tr>
 				</c:forEach>
         
@@ -51,6 +53,7 @@
                         <td>6 HR</td>
                         <td><a href="edit.html">Edit</a></td>
                         <td><a href="delete.html">Delete</a></td>
+                        
                     </tr>
                     
                     <tr>

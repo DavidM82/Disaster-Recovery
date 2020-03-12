@@ -27,7 +27,7 @@
 			    </tr>
 			    <tr>
 			        <td><form:label path="hourlyRate">Hourly Rate:</form:label></td>
-			        <td><form:input path="hourlyRate" value="${jobCodes.hourlyRate}"/></td>
+			        <td><form:input path="hourlyRate" value="${jobCode.hourlyRate}"/></td>
 			    </tr>
 			    
 			    <tr>
