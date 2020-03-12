@@ -17,8 +17,11 @@ public class MachineCode implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id")
+	@Column(name = "machineCodeId")
 	private int machineCodeId;
+	
+	@Column(name = "machineCode")
+	private String machineCode;
 	
 	@Column(name = "description")
 	private String description;
@@ -37,6 +40,14 @@ public class MachineCode implements Serializable {
 		this.machineCodeId = machineCodeId;
 	}
 
+	public String getMachineCode() {
+		return machineCode;
+	}
+	
+	public void setMachineCode(String machineCode) {
+		this.machineCode = machineCode;
+	}
+	
 	public String getDescription() {
 		return description;
 	}

@@ -29,6 +29,6 @@ public class TimeCardDaoImpl extends GenericAbstractDao{
 	@Override
 	public <E> void delete(int id) {
 		// TODO Auto-generated method stub
-		sessionFactory.getCurrentSession().createQuery("DELETE FROM disaster_timecard WHERE id=" + id).executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("DELETE FROM TimeCard timecard WHERE timecard.timeCardId=" + id).executeUpdate();
 	}
 }

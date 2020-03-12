@@ -5,7 +5,7 @@
 <html>
 <head>
    <link rel="stylesheet" href="styles.css" type="text/css">
-<title align ="right">Disaster Recovery Application: Timecard Submission</title>
+<title align ="right">Disaster Recovery Application: Job Codes</title>
 
 </head>
  <div class="header" padding: 30px>
@@ -18,7 +18,7 @@
 <body>        
             <div class = "row1">
                <section><a href="jobCodes.html">Job Code Management</a></section><br>
-               <section><a href="machinemgt.html">Machine Management</a></section><br>
+               <section><a href="machineCodes.html">Machine Code Management</a></section><br>
                <section><a href="timecardapp.html">Timecard Approval</a></section><br>
                
             </div>
@@ -32,7 +32,7 @@
                     <th>Description</th>
                     <th>Hourly Rate</th>
                     <th>Max Hours Per Day</th>
-                    
+                    <th>Actions</th>
                 </tr>
         
         		<c:forEach items="${jobCodes}" var="jobCode">
@@ -41,8 +41,9 @@
 					<td><c:out value="${jobCode.description}"/></td>
 					<td><c:out value="${jobCode.hourlyRate}"/></td>
 					<td><c:out value="${jobCode.maxHours}"/></td>
-					<td><a href="editJobCode.html?jobCodeId=${jobCode.jobCodeId}">Edit</a></td>
-                    <td><a href="removeJobCode.html?jobCodeId=${jobCode.jobCodeId}">Delete</a></td>
+					<td><a href="editJobCode.html?jobCodeId=${jobCode.jobCodeId}">Edit</a> |
+					<a href="removeJobCode.html?jobCodeId=${jobCode.jobCodeId}">Delete</a></td>
+					
 				</tr>
 				</c:forEach>
         

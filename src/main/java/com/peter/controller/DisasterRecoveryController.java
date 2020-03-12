@@ -41,9 +41,8 @@ public class DisasterRecoveryController {
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView welcome() {
-		System.out.println("Welcome");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/jobCodes.html");
+		mav.setViewName("redirect:/machineCodes.html");
 		return mav;
 	}
 	
@@ -79,42 +78,50 @@ public class DisasterRecoveryController {
 		return new ModelAndView("/Admin/timecardapp", model);
 	}
 	
-	@RequestMapping(value="/machinecode", method = RequestMethod.POST)
+	@RequestMapping(value = "/addnewMachineCode", method = RequestMethod.GET)
+	public ModelAndView switchtoMachineCodeForm(@ModelAttribute("command") MachineCodeBean machineCodeBean, BindingResult result) {
+		MachineCode machineCode = new MachineCode();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/machinecodeform");
+		mav.addObject("machineCode", machineCode);
+		return mav;
+	}
+	
+	@RequestMapping(value="/machineCode", method = RequestMethod.POST)
 	public ModelAndView saveMachineCode(@ModelAttribute("command") MachineCodeBean machineCodeBean, BindingResult result) {
 		MachineCode machineCode = prepareMachineCode(machineCodeBean);
 		machineService.add(machineCode);
-		return new ModelAndView("redirect:/machinecodemgt");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/machineCodes.html");
+		return mav;
 	}
 	
-	@RequestMapping(value="/machinecodes", method = RequestMethod.GET)
+	@RequestMapping(value="/machineCodes", method = RequestMethod.GET)
 	public ModelAndView listMachineCodes() {
-		Map<String,Object> model = new HashMap<String,Object>();
-		model.put("machinecodes", prepareMachineCodeBeans(machineService.getAll()));
-		return new ModelAndView("redirect:/machinecodemgt", model);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("machineCodes", machineService.getAll());
+		mav.setViewName("machinecodemgt");
+		return mav;
 	}
 	
 	@RequestMapping(value="/removeMachineCode", method = RequestMethod.GET)
 	public ModelAndView removeMachineCode(@ModelAttribute("command") MachineCodeBean machineCodeBean, BindingResult result) {
 		machineService.delete(machineCodeBean.getMachineCodeId());
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("machineCode", null);
-		model.put("machineCodes", prepareMachineCodeBeans(machineService.getAll()));
-		return new ModelAndView("redirect:/machinecodemgt", model);
+		return new ModelAndView("redirect:/machineCodes.html");
 	}
 	
 	@RequestMapping(value="/editMachineCode", method = RequestMethod.GET)
 	public ModelAndView editMachineCode(@ModelAttribute("command") MachineCodeBean machineCodeBean, BindingResult result) {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("machineCode", prepareMachineCode(machineCodeBean));
-		model.put("machineCodes", prepareMachineCodeBeans(machineService.getAll()));
-		return new ModelAndView("/Admin/machinecodemgt", model);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("machineCode", machineService.get(machineCodeBean.getMachineCodeId()));
+		mav.setViewName("machinecodeform");
+		return mav;
 	}
 	
 	@RequestMapping(value="/addnewJobCode", method = RequestMethod.GET)
 	public ModelAndView switchToJobCodeForm(@ModelAttribute("command") JobCodeBean jobCodeBean, BindingResult result) {
 		JobCode jobCode = new JobCode();
 		ModelAndView mav = new ModelAndView();
-		System.out.println("new JobCode");
 		mav.setViewName("/jobcodeform");
 		mav.addObject("jobCode", jobCode);
 		return mav;
@@ -162,35 +169,6 @@ public class DisasterRecoveryController {
 		return jobCode;
 	}
 	
-	private JobCodeBean prepareJobCodeBean(JobCode jobCode) {
-		JobCodeBean jobCodeBean = new JobCodeBean();
-		jobCodeBean.setDescription(jobCode.getDescription());
-		jobCodeBean.setHourlyRate(jobCode.getHourlyRate());
-		jobCodeBean.setJobCodeId(jobCode.getJobCodeId());
-		jobCodeBean.setJobCode(jobCode.getJobCode());
-		jobCodeBean.setMaxHours(jobCode.getMaxHours());
-		return jobCodeBean;
-	}
-	
-	private List<JobCodeBean> prepareJobCodeBeans(List<Object> objects){
-		List<JobCodeBean> jobCodeBeans = null;
-		if (!objects.isEmpty() && objects != null) {
-			jobCodeBeans = new ArrayList<JobCodeBean>();
-			for (Object j: objects) {
-				if (j instanceof JobCode) {
-					JobCodeBean jb = prepareJobCodeBean((JobCode) j);
-					jobCodeBeans.add(jb);					
-				} else {
-					System.out.println("object in prepareJobCodeBeans was not JobCode object");
-					System.out.println(j.toString());
-					return null;
-				}
-
-			}
-		} 
-		return jobCodeBeans;
-	}
-
 	private List<MachineCodeBean> prepareMachineCodeBeans(List<Object> objects){
 		List<MachineCodeBean> machineCodeBeans = null;
 		if (!objects.isEmpty() && objects !=null) {
@@ -220,6 +198,7 @@ public class DisasterRecoveryController {
 	
 	private MachineCode prepareMachineCode(MachineCodeBean machineCodeBean) {
 		MachineCode machineCode = new MachineCode();
+		machineCode.setMachineCode(machineCodeBean.getMachineCode());
 		machineCode.setDescription(machineCodeBean.getDescription());
 		machineCode.setHourlyRate(machineCodeBean.getHourlyRate());
 		machineCode.setMachineCodeId(machineCodeBean.getMachineCodeId());

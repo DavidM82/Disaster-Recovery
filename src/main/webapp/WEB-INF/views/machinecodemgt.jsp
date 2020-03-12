@@ -5,12 +5,12 @@
 <html>
 <head>
    <link rel="stylesheet" href="styles.css" type="text/css">
-<title align ="right">Disaster Recovery Application: Timecard Submission</title>
+<title align ="right">Disaster Recovery Application: Machine Code Management</title>
 
 </head>
  <div class="header" padding: 30px>
     <header>
-        <h2>Disaster Recovery Application: Timecard Submission</h2>
+        <h2>Disaster Recovery Application: Machine Code Management</h2>
         <h3>Admin</h3>
      </header>
     </div>
@@ -21,25 +21,37 @@
         
         
             <div class = "row1">
-               <section><a href="jobcodemgt.html">Job Code Management</a></section><br>
-               <section><a href="machinemgt.html">Machine Managment</a></section><br>
+               <section><a href="jobCodes.html">Job Code Management</a></section><br>
+               <section><a href="machineCodes.html">Machine Code Management</a></section><br>
                <section><a href="timecardapp.html">Timecard Approval</a></section><br>
                
             </div>
         
            <div class = "row2">
            <h2>Machine Management</h2>
-            <a href="addnew.html">Add New</a><br> 
+            <a href="addnewMachineCode.html">Add New</a><br> 
             <table align="center" border="1">
                 <tr>
                     <th>Machine Code</th>
                     <th>Description</th>
                     <th>Hourly Rent</th>
                     <th>Max Hours Per Day</th>
-                    
+                    <th>Actions</th>
                 </tr>
         
-                    <tr>
+       			<c:forEach items="${machineCodes}" var="machineCode">
+				<tr>
+					<td><c:out value="${machineCode.machineCode}"/></td>
+					<td><c:out value="${machineCode.description}"/></td>
+					<td><c:out value="${machineCode.hourlyRate}"/></td>
+					<td><c:out value="${machineCode.maxHours}"/></td>
+					<td><a href="editMachineCode.html?machineCodeId=${machineCode.machineCodeId}">Edit</a> |
+					<a href="removeMachineCode.html?machineCodeId=${machineCode.machineCodeId}">Delete</a>
+					</td>
+				</tr>
+				</c:forEach>
+        
+                  <!--  <tr>
                         <td>HT-100</td>
                         <td>Hand Truck with 1000 pds</td>
                         <td>$12/Hr </td>
@@ -78,7 +90,7 @@
                         <td><a href="edit.html">Edit</a></td>
                         <td><a href="delete.html">Delete</a></td>
                                           
-                    </tr>
+                    </tr> -->
                     
                      
             </table>  <br>

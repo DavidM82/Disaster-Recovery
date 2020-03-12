@@ -29,7 +29,7 @@ public class MachineCodeDaoImpl extends GenericAbstractDao {
 	@Override
 	public <E> void delete(int id) {
 		// TODO Auto-generated method stub
-		sessionFactory.getCurrentSession().createQuery("DELETE FROM disaster_machinecode WHERE id=" + id).executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("DELETE FROM MachineCode machinecode WHERE machinecode.machineCodeId=" + id).executeUpdate();
 	}
 
 }

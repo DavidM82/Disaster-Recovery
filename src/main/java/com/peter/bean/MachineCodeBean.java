@@ -3,6 +3,7 @@ package com.peter.bean;
 public class MachineCodeBean {
 
 	private Integer machineCodeId;
+	private String machineCode;
 	private String description;
 	private Double hourlyRate;
 	private Integer maxHours;
@@ -29,6 +30,13 @@ public class MachineCodeBean {
 	}
 	public void setMaxHours(Integer maxHours) {
 		this.maxHours = maxHours;
+	}
+	public String getMachineCode() {
+		// TODO Auto-generated method stub
+		return machineCode;
+	}
+	public void setMachineCode(String machineCode) {
+		this.machineCode = machineCode;
 	}
 	
 }
