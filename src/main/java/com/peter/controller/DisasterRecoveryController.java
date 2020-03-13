@@ -9,6 +9,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.peter.bean.JobCodeBean;
 import com.peter.bean.MachineCodeBean;
 import com.peter.bean.TimeCardBean;
-
+import com.peter.bean.UserBean;
 import com.peter.model.JobCode;
 import com.peter.model.MachineCode;
 import com.peter.model.TimeCard;
@@ -40,16 +41,36 @@ public class DisasterRecoveryController {
 	private GenericService timeService;
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public ModelAndView welcome() {
+	public ModelAndView welcome(@ModelAttribute("command") UserBean userbean, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject(userbean);
 		mav.setViewName("index");
+		return mav;
+	}
+	
+	@RequestMapping(value="/login", method = RequestMethod.POST)
+	public ModelAndView logIn(@ModelAttribute("command") UserBean userbean, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		//user admin password root, user con pwd con
+		String user = userbean.getUsername();
+		String pwd = userbean.getPassword();
+		if (user.equals("admin") && pwd.equals("root")) {
+			System.out.println("hello admin");
+			mav.setViewName("redirect:/jobCodes.html");
+		} else if (user.equals("con") && pwd.equals("con")) {
+			System.out.println("hello Con");
+			mav.setViewName("redirect:/timecardsCon.html");
+		} else {
+			System.out.println("Incorrect login");
+			mav.setViewName("badlogin");
+		}
 		return mav;
 	}
 	
 	@RequestMapping(value = "/savetimecardAdmin", method = RequestMethod.POST)
 	public ModelAndView saveTimeCardAdmin(@ModelAttribute("command") TimeCard timeCard, BindingResult result) {
 		timeService.add(timeCard);
-		return new ModelAndView("redirect:/timecardsAdmin.html");
+		return new ModelAndView("redirect:/machineCodes.html");
 	}
 	
 	@RequestMapping(value="/timecardsAdmin", method = RequestMethod.GET)

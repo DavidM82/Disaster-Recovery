@@ -45,50 +45,7 @@
 					<a href="removeMachineCode.html?machineCodeId=${machineCode.machineCodeId}">Delete</a>
 					</td>
 				</tr>
-				</c:forEach>
-        
-                  <!--  <tr>
-                        <td>HT-100</td>
-                        <td>Hand Truck with 1000 pds</td>
-                        <td>$12/Hr </td>
-                        <td>8 HR</td>
-                        <td><a href="edit.html">Edit</a></td>
-                        <td><a href="delete.html">Delete</a></td>
-                    </tr>
-                    
-                    <tr>
-                        <td>AT-800</td>
-                        <td>Appliance Truck</td>
-                        <td>$8/hr </td>
-                        <td>4 HR</td>
-                        <td><a href="edit.html">Edit</a></td>
-                        <td><a href="delete.html">Delete</a></td>
-                      
-                        
-                    </tr>
-                    
-                          
-                    <tr>
-                        <td>AirComp</td>
-                        <td>Air Compressor</td>
-                        <td>$10/hr </td>
-                        <td>4 HR</td>
-                        <td><a href="edit.html">Edit</a></td>
-                        <td><a href="delete.html">Delete</a></td>
-                                          
-                    </tr>
-
-                    <tr>
-                        <td>Power Tools</td>
-                        <td>Power Tools</td>
-                        <td>$6/hr </td>
-                        <td>8 HR</td>
-                        <td><a href="edit.html">Edit</a></td>
-                        <td><a href="delete.html">Delete</a></td>
-                                          
-                    </tr> -->
-                    
-                     
+				</c:forEach>    
             </table>  <br>
 
               
