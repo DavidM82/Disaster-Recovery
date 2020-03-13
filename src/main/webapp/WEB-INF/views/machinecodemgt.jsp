@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-   <link rel="stylesheet" href="styles.css" type="text/css">
+   <style><%@include file="/WEB-INF/style/generalstyle.css"%></style>
 <title align ="right">Disaster Recovery Application: Machine Code Management</title>
 
 </head>

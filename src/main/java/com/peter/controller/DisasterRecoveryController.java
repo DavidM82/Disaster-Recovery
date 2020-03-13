@@ -63,7 +63,7 @@ public class DisasterRecoveryController {
 	@RequestMapping(value="/timecardAdmin", method = RequestMethod.GET)
 	public ModelAndView editTimeCard(@ModelAttribute("command") TimeCard timeCard, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("timeCard", timeService.get(timeCard.getTimeCardId()));
+		mav.addObject("timeCard", timeCard);
 		mav.setViewName("timecardapproval");
 		return mav;
 	}

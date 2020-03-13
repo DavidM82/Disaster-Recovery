@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		 <link rel="stylesheet" href="styles.css" type="text/css">
+		 <style><%@include file="/WEB-INF/style/generalstyle.css"%></style>
 		<title>Disaster Recovery </title>
 	</head>
 	
@@ -25,8 +25,7 @@
                <form:form method="POST" action="savetimecardCon.html">
 	   			<table>
 			    <tr>
-			        <td><form:label path="timeCardId">Time Card Id: (Can't be changed)</form:label></td>
-			        <td><form:input path="timeCardId" value="${timeCard.timeCardId}" readonly="true"/></td>
+			    	<form:hidden path="timeCardId" value="${timeCard.timeCardId}"/>
 			    </tr>
 			    <tr>
 			    	<td><form:label path="siteCode">Site Code:</form:label></td>
@@ -36,14 +35,93 @@
 			        <td><form:label path="contractorName">Contractor Name:</form:label></td>
 			        <td><form:input path="contractorName" value="${timeCard.contractorName}"/></td>
 			    </tr>
+				
+				<tr>
+					<td>
+					<select id="jobCode1"	>
+						<option value="0" label="Select Job Code"/>
+						 <c:forEach items="${jobCodes}" var="jobCode">
+						 <option value="${jobCode.hourlyRate }" label="${jobCode.jobCode }"/>
+						 </c:forEach>
+					</select>
+					</td>
+					<td>Hours worked: <input id="jobHours1" value=0 onchange="multiplyHours(document.getElementById('jobHours1'), document.getElementById('jobCode1').value, document.getElementById('jobPrice1'))" type="number"/> </td>
+					<td>Cost: <input id="jobPrice1" value=0 type="number" disabled></td>
+				</tr>
+				
+				<tr>
+					<td>
+					<select id="jobCode2"	>
+						<option value="0" label="Select Job Code"/>
+						 <c:forEach items="${jobCodes}" var="jobCode">
+						 <option value="${jobCode.hourlyRate }" label="${jobCode.jobCode }"/>
+						 </c:forEach>
+					</select>
+					</td>
+					<td>Hours worked: <input id="jobHours2" value=0 onchange="multiplyHours(document.getElementById('jobHours2'), document.getElementById('jobCode2').value, document.getElementById('jobPrice2'))" type="number"/> </td>
+					<td>Cost: <input id="jobPrice2" value=0 type="number" disabled></td>
+				</tr>
+
+				<tr>
+					<td>
+					<select id="jobCode3"	>
+						<option value="0" label="Select Job Code"/>
+						 <c:forEach items="${jobCodes}" var="jobCode">
+						 <option value="${jobCode.hourlyRate }" label="${jobCode.jobCode }"/>
+						 </c:forEach>
+					</select>
+					</td>
+					<td>Hours worked: <input id="jobHours3" value=0 onchange="multiplyHours(document.getElementById('jobHours3'), document.getElementById('jobCode3').value, document.getElementById('jobPrice3'))" type="number"/> </td>
+					<td>Cost: <input id="jobPrice3" value=0 type="number" disabled></td>
+				</tr>
+				
+				<tr>
+					<td>
+					<select id="machineCode1"	>
+						<option value="0" label="Select Machine Code"/>
+						 <c:forEach items="${machineCodes}" var="machineCode">
+						 <option value="${machineCode.hourlyRate }" label="${machineCode.machineCode }"/>
+						 </c:forEach>
+					</select>
+					</td>
+					<td>Hours Used: <input id="machineHours1" value=0 onchange="multiplyHours(document.getElementById('machineHours1'), document.getElementById('machineCode1').value, document.getElementById('machinePrice1'))" type="number"/> </td>
+					<td>Cost: <input id="machinePrice1" value=0 type="number" disabled></td>
+				</tr>
+				
+				<tr>
+					<td>
+					<select id="machineCode2"	>
+						<option value="0" label="Select Machine Code"/>
+						 <c:forEach items="${machineCodes}" var="machineCode">
+						 <option value="${machineCode.hourlyRate }" label="${machineCode.machineCode }"/>
+						 </c:forEach>
+					</select>
+					</td>
+					<td>Hours Used: <input id="machineHours2" value=0 onchange="multiplyHours(document.getElementById('machineHours2'), document.getElementById('machineCode2').value, document.getElementById('machinePrice2'))" type="number"/> </td>
+					<td>Cost: <input id="machinePrice2" value=0 type="number" disabled></td>
+				</tr>
+				
+				<tr>
+					<td>
+					<select id="machineCode3"	>
+						<option value="0" label="Select Machine Code"/>
+						 <c:forEach items="${machineCodes}" var="machineCode">
+						 <option value="${machineCode.hourlyRate }" label="${machineCode.machineCode }"/>
+						 </c:forEach>
+					</select>
+					</td>
+					<td>Hours Used: <input id="machineHours3" value=0 onchange="multiplyHours(document.getElementById('machineHours3'), document.getElementById('machineCode3').value, document.getElementById('machinePrice3'))" type="number"/> </td>
+					<td>Cost: <input id="machinePrice3" value=0 type="number" disabled></td>
+				</tr>
+				
 			    <tr>
 			        <td><form:label path="totalHours">Total Hours:</form:label></td>
-			        <td><form:input path="totalHours" value="${timeCard.totalHours}"/></td>
+			        <td><form:input id="totalHours" path="totalHours" value="${timeCard.totalHours}" default="0" readonly="true"/></td>
 			    </tr>
 			    
 			    <tr>
 			        <td><form:label path="totalAmount">Total Amount:</form:label></td>
-                    <td><form:input path="totalAmount" value="${timeCard.totalAmount}"/></td>
+                    <td><form:input id="totalAmount" path="totalAmount" value="${timeCard.totalAmount}" default="0" readonly="true"/></td>
 			    </tr>
 			    <form:hidden path="approval" value="pending"/>
 			    <tr>
@@ -51,151 +129,45 @@
 		      </tr>
 			</table> 
 		</form:form>
-               
-               
-               
-               
-               
-               <!--  <form action="/timecard.html">
-                <table align="center" border="1">
-                    <tr>
-                        <th>Labor Entry</th>
-                    </tr>
-            
-                        <tr>
-                            <td>Labor code</td>
-                               <td>
-                                   <select id="laborcode">
-                                <option value = "Plumbe">Plumber</option>
-                                <option value = "Carpenter">Carpenter</option>
-                                <option value = "Electrician">Electrician</option>
-                                <option value = "General Labor">General Labor</option>
-                               </select>
-                               </td>
-                              <td>
-                                  Hours Worked
-                                  <input type="number">
-                              </td>
-                              <td>
-                               Total
-                                <input type="number">
-                            </td>
-                         </tr>   
-                        
-                         <tr>
-                            <td>Labor code</td>
-                               <td>
-                                   <select id="laborcode">
-                                    <option value = "Plumbe">Plumber</option>
-                                    <option value = "Carpenter">Carpenter</option>
-                                    <option value = "Electrician">Electrician</option>
-                                    <option value = "General Labor">General Labor</option>
-                               </select>
-                               </td>
-                              <td>
-                                  Hours Worked
-                                  <input type="number">
-                              </td>
-                              <td>
-                               Total
-                                <input type="number">
-                            </td>
-                         </tr>   
-                         <tr>
-                            <td>Labor code</td>
-                               <td>
-                                   <select id="laborcode">
-                                    <option value = "Plumbe">Plumber</option>
-                                    <option value = "Carpenter">Carpenter</option>
-                                    <option value = "Electrician">Electrician</option>
-                                    <option value = "General Labor">General Labor</option>
-                               </select>
-                               </td>
-                              <td>
-                                  Hours Worked
-                                  <input type="number">
-                              </td>
-                              <td>
-                               Total
-                                <input type="number">
-                            </td>
-                         </tr>   
-
-                         <td align ="right"><a href="addmore.html">Add More</a></td><br> 
-
-                         </table>   <br>
-                            <table align="center" border="1">
-                                <tr>
-                                    <th>Machine Entry</th>
-                                </tr>
-                        
-                                    <tr>
-                                        <td>Machine code</td>
-                                           <td>
-                                               <select id="machinecode">
-                                            <option value = "HT-100">HT-100</option>
-                                            <option value = "AT-800">AT-800</option>
-                                            <option value = "AirComp">AirComp</option>
-                                            <option value = "Power Tools">Power Tools</option>
-                                           </select>
-                                           </td>
-                                          <td>
-                                              Hours used
-                                              <input type="number">
-                                          </td>
-                                          <td>
-                                           Total
-                                            <input type="number">
-                                        </td>
-                                     </tr>   
-                                    
-                                     <tr>
-                                        <td>Machine code</td>
-                                           <td>
-                                               <select id="machinecode">
-                                                <option value = "HT-100">HT-100</option>
-                                                <option value = "AT-800">AT-800</option>
-                                                <option value = "AirComp">AirComp</option>
-                                                <option value = "Power Tools">Power Tools</option>
-                                           </select>
-                                           </td>
-                                          <td>
-                                              Hours Used
-                                              <input type="number">
-                                          </td>
-                                          <td>
-                                           Total
-                                            <input type="number">
-                                        </td>
-                                     </tr>   
-                                     <tr>
-                                        <td>Machine code</td>
-                                           <td>
-                                               <select id="machinecode">
-                                                <option value = "HT-100">HT-100</option>
-                                                <option value = "AT-800">AT-800</option>
-                                                <option value = "AirComp">AirComp</option>
-                                                <option value = "Power Tools">Power Tools</option>
-                                           </select>
-                                           </td>
-                                          <td>
-                                              Hours Used 
-                                              <input type="number">
-                                          </td>
-                                          <td>
-                                           Total
-                                            <input type="number">
-                                        </td>
-                                     </tr>   
-            
-                                     <td align ="right"><a href="addmore.html">Add More</a></td> <br>   
-
-                </table>  <br>
-                                   <p><input type="submit" value="Submit"></p>
-                                   <p><input type="reset" value="Reset"></p>
-                           </form> -->
-            </div>
-            </body>
+          
+    </div>
+    <script>
+    function multiplyHours(numhoursObject, jobHours, output ){
+    	var numhours = parseInt(numhoursObject.value);
+    	if (!numhours){
+    		numhoursObject.value = 0;
+    		numhours = 0;
+    	}
+    	
+    	output.value = numhours * jobHours;
+    	updateAmount();
+    	updateHours();
+    }
+    
+    function updateAmount(){
+    	var amount = document.getElementById('totalAmount');
+    	var job1 = parseInt(document.getElementById('jobPrice1').value);
+    	var job2 = parseInt(document.getElementById('jobPrice2').value);
+    	var job3 = parseInt(document.getElementById('jobPrice3').value);
+    	var machine1 = parseInt(document.getElementById('machinePrice1').value);
+    	var machine2 = parseInt(document.getElementById('machinePrice2').value);
+    	var machine3 = parseInt(document.getElementById('machinePrice3').value);
+    	amount.value = job1 + job2 + job3 + machine1 + machine2 + machine3;
+    }
+    
+    function updateHours(){
+    	var hours = document.getElementById("totalHours");
+    	var job1 = parseInt(document.getElementById("jobHours1").value);
+    	var job2 = parseInt(document.getElementById("jobHours2").value);
+		var job3 = parseInt(document.getElementById('jobHours3').value);
+		var machine1 = parseInt(document.getElementById('machineHours1').value);
+		var machine2 = parseInt(document.getElementById('machineHours2').value);
+		var machine3 = parseInt(document.getElementById('machineHours3').value);
+    	hours.value = job1 + job2 + job3 + machine1 + machine2 + machine3;
+    }
+    
+    </script>
+</body>
     
     
 	

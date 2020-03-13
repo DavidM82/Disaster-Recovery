@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<style><%@include file="/WEB-INF/style/generalstyle.css"%></style>
 <title>Approve Time Card</title>
 </head>
 <body>
@@ -13,8 +14,7 @@
 <form:form method="POST" action="savetimecardAdmin.html">
 	   		<table>
 			    <tr>
-			        <td><form:label path="timeCardId">Time Card Id: (Can't be changed)</form:label></td>
-			        <td><form:input path="timeCardId" value="${timeCard.timeCardId}" readonly="true"/></td>
+			        <form:hidden path="timeCardId" value="${timeCard.timeCardId}"/>
 			    </tr>
 			    <tr>
 			    	<td><form:label path="contractorName">Contractor Name:</form:label></td>
@@ -35,7 +35,13 @@
 			    
 			    <tr>
 			        <td><form:label path="approval">Approval:</form:label></td>
-                    <td><form:input path="approval" value="${timeCard.approval}"/></td>
+                    <td><form:select path="approval">
+                    	<form:option value="pending" label="Choose one"/>
+                    		<form:option value="pending" label="pending" />
+                    		<form:option value="approved" label="approved"/>
+                    		<form:option value="declined" label="declined"/>
+                    	</form:select>
+                    </td>
 			    </tr>
 			    <tr>
 			      <td colspan="2"><input type="submit" value="Submit"/></td>

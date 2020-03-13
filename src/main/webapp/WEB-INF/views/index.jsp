@@ -4,6 +4,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <style><%@include file="/WEB-INF/style/generalstyle.css"%></style>
     <title>Spring3MVC with Hibernate3 CRUD Example using Annotations</title>
   </head>
   <body>
@@ -16,7 +17,6 @@
     <input type="password" placeholder="Enter Password" name="psw" required>
 
     <button type="submit">Login</button>
-    <label>
     
     <br/>
     <a href="jobCodes.html">Admin</a> <br />

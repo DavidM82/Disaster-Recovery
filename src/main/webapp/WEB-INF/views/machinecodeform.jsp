@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-   <link rel="stylesheet" href="styles.css" type="text/css">
+   <style><%@include file="/WEB-INF/style/generalstyle.css"%></style>
 <meta charset="ISO-8859-1">
 <title>Add/Edit Machine Code</title>
 </head>
@@ -14,8 +14,7 @@
 		<form:form method="POST" action="machineCode.html">
 	   		<table>
 			    <tr>
-			        <td><form:label path="machineCodeId">Machine Code Id: (Can't be changed)</form:label></td>
-			        <td><form:input path="machineCodeId" value="${machineCode.machineCodeId}" readonly="true"/></td>
+			        <form:hidden path="machineCodeId" value="${machineCode.machineCodeId}"/>
 			    </tr>
 			    <tr>
 			    	<td><form:label path="machineCode">Machine Code:</form:label></td>

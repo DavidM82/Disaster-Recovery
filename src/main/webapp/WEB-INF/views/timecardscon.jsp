@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		 <link rel="stylesheet" href="styles.css" type="text/css">
+		 <style><%@include file="/WEB-INF/style/generalstyle.css"%></style>
 		<title>Disaster Recovery </title>
 	</head>
 	

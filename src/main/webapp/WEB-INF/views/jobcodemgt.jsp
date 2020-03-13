@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-   <link rel="stylesheet" href="styles.css" type="text/css">
+   <style><%@include file="/WEB-INF/style/generalstyle.css"%></style>
 <title align ="right">Disaster Recovery Application: Job Codes</title>
 
 </head>
@@ -45,55 +45,8 @@
 					<a href="removeJobCode.html?jobCodeId=${jobCode.jobCodeId}">Delete</a></td>
 					
 				</tr>
-				</c:forEach>
-        
-                   <!-- <tr>
-                        <td>Plumber</td>
-                        <td>Fix the Plumbing</td>
-                        <td>$65/Hr </td>
-                        <td>6 HR</td>
-                        <td><a href="edit.html">Edit</a></td>
-                        <td><a href="delete.html">Delete</a></td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        <td>Carpenter</td>
-                        <td>Wood work</td>
-                        <td>$50/hr </td>
-                        <td>4 HR</td>
-                        <td><a href="edit.html">Edit</a></td>
-                        <td><a href="delete.html">Delete</a></td>
-                      
-                        
-                    </tr>
-                    
-                          
-                    <tr>
-                        <td>Electrician</td>
-                        <td>Electric work</td>
-                        <td>$45/hr </td>
-                        <td>4 HR</td>
-                        <td><a href="edit.html">Edit</a></td>
-                        <td><a href="delete.html">Delete</a></td>
-                                          
-                    </tr>
-
-                    <tr>
-                        <td>General Labor</td>
-                        <td>General work</td>
-                        <td>$30/hr </td>
-                        <td>8 HR</td>
-                        <td><a href="edit.html">Edit</a></td>
-                        <td><a href="delete.html">Delete</a></td>
-                                          
-                    </tr> 
-                    -->
-                    
-                     
+				</c:forEach>  
             </table>  <br>
-
-              
         </div>
 </body>
 </html>
