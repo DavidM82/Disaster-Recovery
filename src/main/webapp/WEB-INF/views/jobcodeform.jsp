@@ -18,20 +18,20 @@
 			    </tr>
 			    <tr>
 			    	<td><form:label path="jobCode">Job Code:</form:label></td>
-			    	<td><form:input path="jobCode" value="${jobCode.jobCode }" required/></td>
+			    	<td><form:input path="jobCode" value="${jobCode.jobCode }" required="required"/></td>
 			    </tr>
 			    <tr>
 			        <td><form:label path="description">Job Description:</form:label></td>
-			        <td><form:input path="description" value="${jobCode.description}" required/></td>
+			        <td><form:input path="description" value="${jobCode.description}" required="required"/></td>
 			    </tr>
 			    <tr>
 			        <td><form:label path="hourlyRate">Hourly Rate:</form:label></td>
-			        <td><form:input path="hourlyRate" value="${jobCode.hourlyRate}" required/></td>
+			        <td><form:input path="hourlyRate" value="${jobCode.hourlyRate}" required="required"/></td>
 			    </tr>
 			    
 			    <tr>
 			        <td><form:label path="maxHours">Max hours per day:</form:label></td>
-                    <td><form:input path="maxHours" value="${jobCode.maxHours}" required/></td>
+                    <td><form:input path="maxHours" value="${jobCode.maxHours}" required="required"/></td>
 			    </tr>
 			    <tr>
 			      <td colspan="2"><input type="submit" value="Submit"/></td>

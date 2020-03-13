@@ -18,20 +18,20 @@
 			    </tr>
 			    <tr>
 			    	<td><form:label path="machineCode">Machine Code:</form:label></td>
-			    	<td><form:input path="machineCode" value="${machineCode.machineCode }" required/></td>
+			    	<td><form:input path="machineCode" value="${machineCode.machineCode}" required="required"/></td>
 			    </tr>
 			    <tr>
 			        <td><form:label path="description">Machine Description:</form:label></td>
-			        <td><form:input path="description" value="${machineCode.description}" required/></td>
+			        <td><form:input path="description" value="${machineCode.description}" required="required"/></td>
 			    </tr>
 			    <tr>
 			        <td><form:label path="hourlyRate">Hourly Rate:</form:label></td>
-			        <td><form:input path="hourlyRate" value="${machineCode.hourlyRate}" required/></td>
+			        <td><form:input path="hourlyRate" value="${machineCode.hourlyRate}" required="required"/></td>
 			    </tr>
 			    
 			    <tr>
 			        <td><form:label path="maxHours">Max hours per day:</form:label></td>
-                    <td><form:input path="maxHours" value="${machineCode.maxHours}" required/></td>
+                    <td><form:input path="maxHours" value="${machineCode.maxHours}" required="required"/></td>
 			    </tr>
 			    <tr>
 			      <td colspan="2"><input type="submit" value="Submit"/></td>

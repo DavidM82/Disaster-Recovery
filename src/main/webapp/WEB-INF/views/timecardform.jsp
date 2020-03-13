@@ -29,11 +29,11 @@
 			    </tr>
 			    <tr>
 			    	<td><form:label path="siteCode">Site Code:</form:label></td>
-			    	<td><form:input path="siteCode" value="${timeCard.siteCode }"/></td>
+			    	<td><form:input path="siteCode" value="${timeCard.siteCode }" required="required"/></td>
 			    </tr>
 			    <tr>
 			        <td><form:label path="contractorName">Contractor Name:</form:label></td>
-			        <td><form:input path="contractorName" value="${timeCard.contractorName}"/></td>
+			        <td><form:input path="contractorName" value="${timeCard.contractorName}" required="required"/></td>
 			    </tr>
 				
 				<tr>
