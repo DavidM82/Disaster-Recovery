@@ -70,7 +70,7 @@ public class DisasterRecoveryController {
 	@RequestMapping(value = "/savetimecardAdmin", method = RequestMethod.POST)
 	public ModelAndView saveTimeCardAdmin(@ModelAttribute("command") TimeCard timeCard, BindingResult result) {
 		timeService.add(timeCard);
-		return new ModelAndView("redirect:/machineCodes.html");
+		return new ModelAndView("redirect:/timecardsAdmin.html");
 	}
 	
 	@RequestMapping(value="/timecardsAdmin", method = RequestMethod.GET)
@@ -84,7 +84,7 @@ public class DisasterRecoveryController {
 	@RequestMapping(value="/timecardAdmin", method = RequestMethod.GET)
 	public ModelAndView editTimeCard(@ModelAttribute("command") TimeCard timeCard, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("timeCard", timeCard);
+		mav.addObject("timeCard", timeService.get(timeCard.getTimeCardId()));
 		mav.setViewName("timecardapproval");
 		return mav;
 	}

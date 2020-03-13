@@ -7,15 +7,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <style><%@include file="/WEB-INF/style/generalstyle.css"%></style>
-    <title>Spring3MVC with Hibernate3 CRUD Example using Annotations</title>
+    <title>Disaster-Recovery</title>
   </head>
   <body>
+  <div class="row2">
     <h2>Disaster Recovery Login</h2>
-    <div class="container">
     <form:form method="POST" action="login.html">
 	   		<table>
 			    <tr>
-			    	<td><form:label path="username">Username:</form:label></td>
+			    	<td><form:label path="username" value="">Username:</form:label></td>
 			    	<td><form:input path="username" required="required"/></td>
 			    </tr>
 			    <tr>
@@ -23,8 +23,10 @@
 			        <td><form:input path="password" type="password" required="required"/></td>
 			    </tr>
 			    <tr>
-			      <td colspan="2"><input type="submit" value="Submit"/></td>
+			      <td colspan="2"><input class="button" type="submit" value="Submit"/></td>
 		      </tr>
 			</table> 
 		</form:form>
+	</div>	
+</body>
 </html>

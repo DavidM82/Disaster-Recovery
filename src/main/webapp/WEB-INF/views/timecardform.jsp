@@ -20,7 +20,7 @@
 	<body>
 		
                <div class ="row1">
-                <h3>Time Card Submission</h3>
+                <h2>Time Card Submission</h2>
                 
                <form:form method="POST" action="savetimecardCon.html">
 	   			<table>
@@ -125,7 +125,7 @@
 			    </tr>
 			    <form:hidden path="approval" value="pending"/>
 			    <tr>
-			      <td colspan="2"><input type="submit" value="Submit"/></td>
+			      <td colspan="2"><input class="button" type="submit" value="Submit"/></td>
 		      </tr>
 			</table> 
 		</form:form>

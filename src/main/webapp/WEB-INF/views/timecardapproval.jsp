@@ -22,7 +22,7 @@
 			    </tr>
 			    <tr>
 			    	<td><form:label path="siteCode">Site Code:</form:label></td>
-			    	<td><form:label path="siteCode" value="${timeCard.siteCode }" readonly="true"/></td>
+			    	<td><form:input path="siteCode" value="${timeCard.siteCode}" readonly="true"/></td>
 			    </tr>
 			    <tr>
 			        <td><form:label path="totalHours">Total Hours:</form:label></td>
@@ -44,7 +44,7 @@
                     </td>
 			    </tr>
 			    <tr>
-			      <td colspan="2"><input type="submit" value="Submit"/></td>
+			      <td colspan="2"><input class="button" type="submit" value="Submit"/></td>
 		      </tr>
 			</table> 
 		</form:form>

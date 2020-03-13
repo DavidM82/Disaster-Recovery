@@ -3,13 +3,26 @@ header {
     padding: 35px;
     text-align: justify;
     background-color: blue;
-    
+    color: white;
+}
+
+h3 {
+	color: #f44336;
+	text-size: 50x;
+	text-transform: uppercase;
+	font-weight: bold;
 }
 
 body {
     background-color: azure;
 }
 
+
+a{
+	color: #f44336;
+	font-weight: bold;
+	margin-left:25%;
+}
 
 .row1 {
     width: 30%;
@@ -21,4 +34,28 @@ body {
 .row2 {
     width: 70%;
     float: right;
+	display:inline-block;
+}
+
+h2{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	display: inline-block;
+}
+
+td {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.button {
+  margin-top: 20px;
+  float: right;
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius:12px;
 }

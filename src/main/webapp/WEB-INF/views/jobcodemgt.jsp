@@ -41,7 +41,7 @@
 					<td><c:out value="${jobCode.description}"/></td>
 					<td><c:out value="$ ${jobCode.hourlyRate}/Hr."/></td>
 					<td><c:out value="${jobCode.maxHours} Hr"/></td>
-					<td><a href="editJobCode.html?jobCodeId=${jobCode.jobCodeId}">Edit</a> |
+					<td><a href="editJobCode.html?jobCodeId=${jobCode.jobCodeId}">Edit</a>
 					<a href="removeJobCode.html?jobCodeId=${jobCode.jobCodeId}">Delete</a></td>
 					
 				</tr>

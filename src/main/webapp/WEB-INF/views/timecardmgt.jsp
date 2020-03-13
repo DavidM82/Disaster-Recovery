@@ -44,7 +44,7 @@
 					<td><c:out value="${timeCard.totalHours} Hrs."/></td>
 					<td><c:out value="$ ${timeCard.totalAmount}"/></td>
 					<td><c:out value="${timeCard.approval}"/></td>
-					<td><a href="timecardAdmin.html?timeCardId=${timeCard.timeCardId}">Change Approval</a></td>
+					<td><a href="timecardAdmin.html?timeCardId=${timeCard.timeCardId}">Edit</a></td>
 				</tr>
 				</c:forEach>
         
